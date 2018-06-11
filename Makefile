@@ -3,6 +3,9 @@ default:  test
 test:
 	python manage.py test --testrunner=green.djangorunner.DjangoRunner
 
+style:
+	pycodestyle polls/. wazeru/.
+
 runserver:
 	python manage.py runserver
 

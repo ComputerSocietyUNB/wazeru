@@ -13,6 +13,7 @@ def create_question(question_text, days=0):
     time = timezone.now() + datetime.timedelta(days=days)
     return Question.objects.create(question_text=question_text, pub_date=time)
 
+
 def create_choices(choice_map, question):
     """
     Create a map of choices and votes with the given `choice_map` and the
@@ -28,10 +29,12 @@ def create_choices(choice_map, question):
         ))
     return choices
 
+
 def create_poll(question_text, choice_map, days=0):
     question = create_question(question_text=question_text, days=days)
     choices = create_choices(choice_map, question)
     return [question, choices]
+
 
 class Question(models.Model):
     def __str__(self):

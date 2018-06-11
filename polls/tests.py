@@ -7,6 +7,7 @@ from django.urls import reverse
 from .models import Question, Choice
 from .models import create_question, create_choices, create_poll
 
+
 class QuestionModelTests(TestCase):
     def test_str_question_equals_text(self):
         """
