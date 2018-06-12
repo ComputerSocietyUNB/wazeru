@@ -1,19 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if latest_question_list %}
-  <ul>
-    <!-- {% for question in latest_question_list %}
-      <li>
-        <a href="{% url 'polls:detail' question.id %}">
-        {{question.question_text}}</a>
-      </li>
-    {% endfor %} -->
-    {% load static %}
+{% load static %}
+{% if media_votos < 2 %}
+    <img src="{% static "img/happyface.png" %}" class="img-fluid" alt="Meh face"/>
+{% elif media_votos < 4 %}
+    <img src="{% static "img/okface.png" %}" class="img-fluid" alt="Meh face"/>
+{% elif media_votos < 6 %}
     <img src="{% static "img/mehface.png" %}" class="img-fluid" alt="Meh face"/>
-    <!-- <div class="text-center">
-    </div> -->
-  </ul>
+{% elif media_votos < 8 %}
+    <img src="{% static "img/sadface.png" %}" class="img-fluid" alt="Meh face"/>
 {% else %}
-  <p>No polls are available.</p>
+    <img src="{% static "img/andgryface.png" %}" class="img-fluid" alt="Meh face"/>
 {% endif %}
 {% endblock %}
