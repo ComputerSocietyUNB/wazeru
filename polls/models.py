@@ -1,7 +1,21 @@
 import datetime
+from datetime import date
 
 from django.db import models
 from django.utils import timezone
+
+from apscheduler.schedulers.background import BackgroundScheduler
+from django_apscheduler.jobstores import DjangoJobStore
+from django_apscheduler.jobstores import register_events
+
+
+# scheduler = BackgroundScheduler()
+# scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
+# register_events(scheduler)
+#
+# @scheduler.scheduled_job("interval", seconds=10, id="job")
+# def job():
+#     create_poll("Como está o RU?" + strtime(), choice_map)
 
 
 def create_question(question_text, days=0):

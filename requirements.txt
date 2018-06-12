@@ -9,3 +9,5 @@ whitenoise
 pycodestyle
 green
 coverage
+apscheduler
+django-apscheduler

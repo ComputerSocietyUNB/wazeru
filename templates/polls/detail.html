@@ -1,12 +1,25 @@
-<h1>{{ question.question_text }}</h1>
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  <div class="col-sm-12 col-md-12">
+    <h3>{{ question.question_text }}</h3>
+    {% if error_message %}
+      <p>
+        <strong>{{ error_message }}</strong>
+      </p>
+    {% endif %}
 
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-{% endfor %}
-<input type="submit" value="Vote" />
-</form>
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+    <!-- easy-to-use system for protecting against Cross Site Request Forgeries -->
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+      <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+      <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br/>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Votar &raquo;</button>
+
+    </form>
+  </div>
+</div>
+{% endblock %}
