@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+{% load googlecharts %}
+{# container #}
+<div id="out"></div>
+{% googlecharts %}
+	{% data values "out_data" %}
+		{% col "string" "Name" %}"{{ val }}"{% endcol %}
+		{% col "number" "Value" %}{{ val }}{% endcol %}
+	{% enddata %}
+	{% options "out_options" %}
+		kind: "LineChart",
+
+	{% endoptions %}
+	{% graph "out" "out_data" "out_options" %}
+{% endgooglecharts %}
+{% endblock %}

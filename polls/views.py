@@ -32,10 +32,68 @@ class DetailView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-
 class ResultsView(generic.DetailView):
     model = Question
-    template_name = 'polls/results.html'
+    template_name = 'charts/results.html'
+
+    def get_context_data(self, **kwargs):
+        choice = kwargs['object'].choice_set
+        c = choice.reverse()
+        context = {'values': [[choice.get(pk=c[0].pk).choice_text,
+                            choice.get(pk=c[0].pk).votes],
+                            [choice.get(pk=c[1].pk).choice_text,
+                            choice.get(pk=c[1].pk).votes],
+                            [choice.get(pk=c[2].pk).choice_text,
+                            choice.get(pk=c[2].pk).votes],
+                            [choice.get(pk=c[3].pk).choice_text,
+                            choice.get(pk=c[3].pk).votes]]}
+        return context
+
+def ResultSemanalView(request, slug):
+    """
+    Grafico Diario
+    """
+    segunda = [2,1,2,4,3,1,2,4,1]
+    terca = [1,1,3,4,4,2,2,3,1]
+    quarta = [2,2,3,4,3,2,2,3,2]
+    quinta = [1,1,3,4,4,2,2,3,1]
+    sexta = [1,1,3,4,4,2,2,3,1]
+    sabado = [1,1,3,4,4,2,2,3,1]
+    domingo = [1,1,3,4,4,2,2,3,1]
+    if slug == 'segunda':
+        dia = segunda
+    elif slug == 'terca':
+        dia = terca
+    elif slug == 'quarta':
+        dia = quarta
+    elif slug == 'quinta':
+        dia = quinta
+    elif slug == 'sexta':
+        dia = sexta
+    elif slug == 'sabado':
+        dia = sabado
+    elif slug == 'domingo':
+        dia = domingo
+
+    context = [['7-8',dia[0]],
+                        ['8-9',dia[1]],
+                        ['11-12',dia[2]],
+                        ['12-13',dia[3]],
+                        ['13-14',dia[4]],
+                        ['14-15',dia[5]],
+                        ['17-18',dia[6]],
+                        ['18-19',dia[7]],
+                        ['19-20',dia[8]]
+                        ]
+
+    return render(
+        request, 'charts/results.html',
+        {
+            'values': context,
+            'dia': slug
+        }
+    )
+
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
