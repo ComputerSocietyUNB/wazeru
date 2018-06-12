@@ -38,15 +38,19 @@ class ResultsView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         choice = kwargs['object'].choice_set
+        questions = Question.objects.filter(
+            pub_date__lte=timezone.now()
+        ).order_by('-pub_date')[:5]
         c = choice.reverse()
         context = {}
         context['values'] = []
         for i in range((len(c))):
-            context1['values'].append(
+            context['values'].append(
             [
                 choice.get(pk=c[i].pk).choice_text,
                 choice.get(pk=c[i].pk).votes
             ])
+        context['latest_question_list'] = questions
         return context
 
 def ResultSemanalView(request, slug):
