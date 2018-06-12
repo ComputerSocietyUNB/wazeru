@@ -25,12 +25,13 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
 
-    def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return Question.objects.filter(pub_date__lte=timezone.now())
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        latest_question = Question.objects.filter(
+            pub_date__lte=timezone.now()
+        ).order_by('-pub_date')[:5]
+        context['latest_question_list'] = latest_question
+        return context
 
 class ResultsView(generic.DetailView):
     model = Question
@@ -38,6 +39,9 @@ class ResultsView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         choice = kwargs['object'].choice_set
+        questions = Question.objects.filter(
+            pub_date__lte=timezone.now()
+        ).order_by('-pub_date')[:5]
         c = choice.reverse()
         context = {'values': [[choice.get(pk=c[0].pk).choice_text,
                             choice.get(pk=c[0].pk).votes],
@@ -46,7 +50,8 @@ class ResultsView(generic.DetailView):
                             [choice.get(pk=c[2].pk).choice_text,
                             choice.get(pk=c[2].pk).votes],
                             [choice.get(pk=c[3].pk).choice_text,
-                            choice.get(pk=c[3].pk).votes]]}
+                            choice.get(pk=c[3].pk).votes]],
+                    'latest_question_list': questions}
         return context
 
 def ResultSemanalView(request, slug):
