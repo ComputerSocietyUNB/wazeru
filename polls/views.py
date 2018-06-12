@@ -43,15 +43,15 @@ class ResultsView(generic.DetailView):
             pub_date__lte=timezone.now()
         ).order_by('-pub_date')[:5]
         c = choice.reverse()
-        context = {'values': [[choice.get(pk=c[0].pk).choice_text,
-                            choice.get(pk=c[0].pk).votes],
-                            [choice.get(pk=c[1].pk).choice_text,
-                            choice.get(pk=c[1].pk).votes],
-                            [choice.get(pk=c[2].pk).choice_text,
-                            choice.get(pk=c[2].pk).votes],
-                            [choice.get(pk=c[3].pk).choice_text,
-                            choice.get(pk=c[3].pk).votes]],
-                    'latest_question_list': questions}
+        context = {}
+        context['values'] = []
+        for i in range((len(c))):
+            context['values'].append(
+            [
+                choice.get(pk=c[i].pk).choice_text,
+                choice.get(pk=c[i].pk).votes
+            ])
+        context['latest_question_list'] = questions
         return context
 
 def ResultSemanalView(request, slug):
