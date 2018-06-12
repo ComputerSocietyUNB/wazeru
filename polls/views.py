@@ -39,14 +39,14 @@ class ResultsView(generic.DetailView):
     def get_context_data(self, **kwargs):
         choice = kwargs['object'].choice_set
         c = choice.reverse()
-        context = {'values': [[choice.get(pk=c[0].pk).choice_text,
-                            choice.get(pk=c[0].pk).votes],
-                            [choice.get(pk=c[1].pk).choice_text,
-                            choice.get(pk=c[1].pk).votes],
-                            [choice.get(pk=c[2].pk).choice_text,
-                            choice.get(pk=c[2].pk).votes],
-                            [choice.get(pk=c[3].pk).choice_text,
-                            choice.get(pk=c[3].pk).votes]]}
+        context = {}
+        context['values'] = []
+        for i in range((len(c))):
+            context1['values'].append(
+            [
+                choice.get(pk=c[i].pk).choice_text,
+                choice.get(pk=c[i].pk).votes
+            ])
         return context
 
 def ResultSemanalView(request, slug):
