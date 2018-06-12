@@ -9,12 +9,6 @@ from .models import create_question, create_choices, create_poll
 
 
 class QuestionModelTests(TestCase):
-    def test_str_question_equals_text(self):
-        """
-        Question.__str__ returns Question.question_text() for every Question.
-        """
-        question = Question(question_text="Question text")
-        self.assertEqual(question.__str__(), question.question_text)
 
     def test_was_published_recently_with_future_question(self):
         """
@@ -42,25 +36,7 @@ class QuestionModelTests(TestCase):
         time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
-
-
-class ChoiceModelTests(TestCase):
-    def test_str_choice_equals_text(self):
-        """
-        Choice.__str__ returns Choice.choice_text() for every Choice.
-        """
-        choice = Choice(choice_text="Choice text")
-        self.assertEqual(choice.__str__(), choice.choice_text)
-
-    def test_choice_has_no_question(self):
-        """
-        was_published_recently() returns True for questions whose pub_date
-        is within the last day.
-        """
-        time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
-        recent_question = Question(pub_date=time)
-        self.assertIs(recent_question.was_published_recently(), True)
-
+        
 
 class PollGeneratorTests(TestCase):
     def setUp(self):
