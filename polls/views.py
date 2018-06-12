@@ -91,7 +91,7 @@ def ResultSemanalView(request, slug):
                         ['19-20',dia[8]]
                         ]
     context['values'] = context_graph
-    context['dia'] = dia
+    context['dia'] = slug
     context['latest_question'] = question
 
     return render(
