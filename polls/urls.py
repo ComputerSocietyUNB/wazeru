@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:question_id>/vote/', views.vote, name='vote'),
     path('semanal/', views.semanal_template , name='semanal'),
     path('semanal/<slug:slug>', views.ResultSemanalView , name='diario'),
+    path('about/', TemplateView.as_view(template_name="polls/about.html")),
 ]
