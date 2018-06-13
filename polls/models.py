@@ -9,14 +9,6 @@ from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.jobstores import register_events
 
 
-# scheduler = BackgroundScheduler()
-# scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
-# register_events(scheduler)
-#
-# @scheduler.scheduled_job("interval", seconds=10, id="job")
-# def job():
-#     create_poll("Como está o RU?" + strtime(), choice_map)
-
 
 def create_question(question_text, days=0):
     """
@@ -73,3 +65,16 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+
+
+scheduler = BackgroundScheduler()
+scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
+register_events(scheduler)
+
+@scheduler.scheduled_job("interval", seconds=10, id="job")
+def job():
+    choice_map = {
+        '<img src="{% static "img/happyface.png" %}" class="img-fluid" alt="Meh face"/>': 2,
+        '<img src="{% static "img/okface.png" %}" class="img-fluid" alt="Meh face"/>': 3
+    }
+    create_poll("Como está o RU?" + strtime(), choice_map)
