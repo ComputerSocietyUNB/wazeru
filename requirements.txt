@@ -12,3 +12,4 @@ coverage
 apscheduler
 django-apscheduler
 Pillow
+psycopg2
