@@ -12,16 +12,16 @@
   <div class="row">
     <div class="col-sm-1 col-md-3"></div>
     <div class="col-sm-10 col-md-6">
-      {% if media_votos < 2 %}
-          <img src="{% static "img/happyface.png" %}" class="img-fluid flex" alt="Happy face"/>
-      {% elif media_votos < 4 %}
-          <img src="{% static "img/okface.png" %}" class="img-fluid flex" alt="Ok face"/>
-      {% elif media_votos < 6 %}
-          <img src="{% static "img/mehface.png" %}" class="img-fluid flex" alt="Meh face"/>
-      {% elif media_votos < 8 %}
-          <img src="{% static "img/sadface.png" %}" class="img-fluid flex" alt="Sad face"/>
+      {% if media_votos <= 0.5 %}
+          <img src="{% static "img/happyface.png" %}" class="img-fluid" alt="Happy face"/>
+      {% elif media_votos <= 1.5 %}
+          <img src="{% static "img/okface.png" %}" class="img-fluid" alt="Ok face"/>
+      {% elif media_votos <= 2.5 %}
+          <img src="{% static "img/mehface.png" %}" class="img-fluid" alt="Meh face"/>
+      {% elif media_votos <= 3.5 %}
+          <img src="{% static "img/sadface.png" %}" class="img-fluid" alt="Sad face"/>
       {% else %}
-          <img src="{% static "img/andgryface.png" %}" class="img-fluid flex" alt="Angry face"/>
+          <img src="{% static "img/angryface.png" %}" class="img-fluid" alt="Angry face"/>
       {% endif %}
       </div>
       <div class="col-sm-1 col-md-3"></div>

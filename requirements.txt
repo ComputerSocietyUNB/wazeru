@@ -11,3 +11,4 @@ green
 coverage
 apscheduler
 django-apscheduler
+Pillow

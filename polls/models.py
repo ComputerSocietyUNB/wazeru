@@ -9,7 +9,6 @@ from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.jobstores import register_events
 
 
-
 def create_question(question_text, days=0):
     """
     Create a question with the given `question_text` and published the

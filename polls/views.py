@@ -135,7 +135,7 @@ def get_latest_question():
 
 def media(question):
     choices_set = question.choice_set
-    vote_peso = 1
+    vote_peso = 0
     vote_qtd = 0
     media_votes = 0
     for choice in choices_set.all().order_by('id'):
@@ -143,4 +143,4 @@ def media(question):
         vote_peso += 1
         vote_qtd += choice.votes
     media_votes = media_votes/vote_qtd
-    return (10*media_votes)/5
+    return (10*media_votes)/10

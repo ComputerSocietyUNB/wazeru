@@ -1,1 +1,1 @@
-web: gunicorn siweb.wsgi --log-file -
+web: gunicorn wazeru.wsgi --log-file -
