@@ -3,36 +3,37 @@
 {% block content %}
 {% load static %}
 <div class="row">
-
   <div class="col-sm-12 col-md-12">
-    <h3>{{ question.question_text }}</h3>
+    <div id="centralize">
+      <h1>{{ question.question_text }}</h1>
+    </div>
     {% if error_message %}
       <p>
         <strong>{{ error_message }}</strong>
       </p>
     {% endif %}
-
-    <form action="{% url 'polls:vote' question.id %}" method="post">
-    <!-- easy-to-use system for protecting against Cross Site Request Forgeries -->
-    {% csrf_token %}
-    {% for choice in question.choice_set.all %}
-      <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-      <label for="choice{{ forloop.counter }}">
-      {% if choice.choice_text == ":((" %}
-        <img src="{% static "img/angryface.png" %}" class="img-answer" alt="Angry face"/>
-      {% elif choice.choice_text == ":(" %}
-        <img src="{% static "img/sadface.png" %}" class="img-answer" alt="Sad face"/>
-      {% elif choice.choice_text == ":|" %}
-        <img src="{% static "img/mehface.png" %}" class="img-answer" alt="Meh face"/>
-      {% elif choice.choice_text == ":)" %}
-        <img src="{% static "img/okface.png" %}" class="img-answer" alt="Ok face"/>
-      {% elif choice.choice_text == ":))" %}
-        <img src="{% static "img/happyface.png" %}" class="img-answer" alt="Happy face"/>
-      {% endif %}
-      </label><br/>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Votar &raquo;</button>
-
+    <div id="centralize">
+      <form action="{% url 'polls:vote' question.id %}" method="post">
+      <!-- easy-to-use system for protecting against Cross Site Request Forgeries -->
+      {% csrf_token %}
+      {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">
+        {% if choice.choice_text == ":((" %}
+          <img src="{% static "img/angryface.png" %}" class="img-answer" alt="Angry face"/>
+        {% elif choice.choice_text == ":(" %}
+          <img src="{% static "img/sadface.png" %}" class="img-answer" alt="Sad face"/>
+        {% elif choice.choice_text == ":|" %}
+          <img src="{% static "img/mehface.png" %}" class="img-answer" alt="Meh face"/>
+        {% elif choice.choice_text == ":)" %}
+          <img src="{% static "img/okface.png" %}" class="img-answer" alt="Ok face"/>
+        {% elif choice.choice_text == ":))" %}
+          <img src="{% static "img/happyface.png" %}" class="img-answer" alt="Happy face"/>
+        {% endif %}
+        </label><br/>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Votar &raquo;</button>
+    </div>
     </form>
   </div>
 </div>
