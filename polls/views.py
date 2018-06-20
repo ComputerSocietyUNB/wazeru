@@ -142,7 +142,8 @@ def media(question):
         media_votes += (vote_peso * choice.votes)
         vote_peso += 1
         vote_qtd += choice.votes
-    media_votes = media_votes/vote_qtd
     if media_votes == 0:
         media_votes = 2
+        vote_qtd = 1
+    media_votes = media_votes/vote_qtd
     return (10*media_votes)/10
