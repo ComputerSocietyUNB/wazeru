@@ -1,6 +1,10 @@
 # WazeRu
 Responsive web app for checking amount of visitors on UnB's Restaurant
 
+### Working Prototype
+
+[Heroku app](https://wazeru.herokuapp.com)
+
 ### Instalar pacotes básicos
 - python 3.6
 - pip
